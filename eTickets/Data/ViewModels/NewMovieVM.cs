@@ -8,44 +8,44 @@ namespace eTickets.Models
     public class NewMovieVM
     {
 
-        [Display(Description = "Movie Name")]
+        [Display(Name = "Movie Name")]
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
-        [Display(Description = "Movie Description")]
+        [Display(Name = "Movie Description")]
         [Required(ErrorMessage = "Description is required")]
         public string Description { get; set; }
 
-        [Display(Description = "Price in $")]
+        [Display(Name = "Price in $")]
         [Required(ErrorMessage = "Price is required")]
         public double Price { get; set; }
 
-        [Display(Description = "Movie poster URL")]
+        [Display(Name = "Movie poster URL")]
         [Required(ErrorMessage = "Movie poster URL is required")]
         public string ImageURL { get; set; }
 
-        [Display(Description = "Movie Start date")]
+        [Display(Name = "Movie Start date")]
         [Required(ErrorMessage = "Start date is required")]
         public DateTime StartDate { get; set; }
 
-        [Display(Description = "Movie End date")]
+        [Display(Name = "Movie End date")]
         [Required(ErrorMessage = "End date is required")]
         public DateTime EndDate { get; set; }
 
-        [Display(Description = "Select a category")]
+        [Display(Name = "Select a category")]
         [Required(ErrorMessage = "End date is required")]
         public MovieCategory MovieCategory { get; set; }
 
         // Relationships
-        [Display(Description = "Select actor(s)")]
+        [Display(Name = "Select actor(s)")]
         [Required(ErrorMessage = "Movie actor(s) is required")]
         public List<int> ActorIds { get; set; }
 
-        [Display(Description = "Select a cinema")]
+        [Display(Name = "Select a cinema")]
         [Required(ErrorMessage = "Movie cinema is required")]
         public int CinemaId { get; set; }
 
-        [Display(Description = "Select a producer")]
+        [Display(Name = "Select a producer")]
         [Required(ErrorMessage = "Movie producer is required")]
         public int ProducerId { get; set; }
         
