@@ -13,7 +13,7 @@
                             <p class="card-text">
                                 <h5 class="card-title">
                                     @Model.Name
-                                    <a class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
+                                <a class="text-white float-end" asp-action="Edit" asp-route-id="@Model.Id"><i class="bi bi-pencil-square"></i></a>
                                 </h5>
                             </p>
                         </div>
@@ -57,10 +57,12 @@
                             <p class="card-text">
                                 <b>Actors: </b>
                                 <hr />
-                                <div class="row">
-                                @foreach (var actor in Model.Actors_Movies)
+                            <div style="display: flex;justify-content: flex-start;flex-direction: row;/* margin-left: 2rem; */">
+                                @for (int i = 0; i < Model.Actors_Movies.Count; i++)
                                 {
-                                    <div class="column text-center">
+                                    var actor = Model.Actors_Movies[i];
+                                    var marginClass = (i == 0) ? "" : "ms-4";
+                                    <div class="column text-center @marginClass">
                                         <img class="border-info rounded-circle" src="@actor.Actor.ProfilePictureURL" style="max-width: 150px" />
                                         <br />
                                         <a asp-controller="Actors" asp-action="Details" asp-route-id="@actor.ActorId">@actor.Actor.FullName</a>
@@ -79,7 +81,7 @@
                                 </a>
                                 <a class="btn btn-success text-white @((DateTime.Now > Model.EndDate) ? "disabled" : "")"
                                    asp-controller="Orders"
-                                   asp-action="AddModelToShoppingCart"
+                               asp-action="AddItemToShoppingCart"
                                    asp-route-id="@Model.Id">
                                     <i class="bi bi-cart-plus"></i> Add to Cart (Price @Model.Price.ToString("c"))
                                 </a>
