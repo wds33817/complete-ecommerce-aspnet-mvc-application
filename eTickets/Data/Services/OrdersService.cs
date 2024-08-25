@@ -10,9 +10,25 @@ namespace eTickets.Data.Services
         {
 			_context = context;
 		}
-        public async Task<List<Order>> GetOrdersByUserIdAsync(string userId)
+        public async Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string userId, string userRole)
 		{
-			var orders = await _context.Orders.Include(n => n.OrderItems).ThenInclude(n => n.Movie).Where(n => n.UserId == userId).ToListAsync();
+			var orders = await _context.Orders.Include(n => n.OrderItems).ThenInclude(n => n.Movie).Include(n => n.User).ToListAsync();
+            /* LINQ
+			 * SELECT [o].[Id], [o].[Email], [o].[UserId], [a].[Id], [t].[Id], [t].[Amount], [t].[MovieId], [t].[OrderId], [t].[Price], [t].[Id0], [t].[CinemaId], [t].[Description], [t].[EndDate], [t].[ImageURL], [t].[MovieCategory], [t].[Name], [t].[Price0], [t].[ProducerId], [t].[StartDate], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[FullName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+				FROM [Orders] AS [o]
+				INNER JOIN [AspNetUsers] AS [a] ON [o].[UserId] = [a].[Id]
+				LEFT JOIN (
+					SELECT [o0].[Id], [o0].[Amount], [o0].[MovieId], [o0].[OrderId], [o0].[Price], [m].[Id] AS [Id0], [m].[CinemaId], [m].[Description], [m].[EndDate], [m].[ImageURL], [m].[MovieCategory], [m].[Name], [m].[Price] AS [Price0], [m].[ProducerId], [m].[StartDate]
+					FROM [OrderItems] AS [o0]
+					INNER JOIN [Movies] AS [m] ON [o0].[MovieId] = [m].[Id]
+				) AS [t] ON [o].[Id] = [t].[OrderId]
+				ORDER BY [o].[Id], [a].[Id], [t].[Id]
+			 */
+            if (userRole != "admin")
+			{
+				orders = orders.Where(n => n.UserId == userId).ToList();
+			}
+
 			return orders;
 		}
 

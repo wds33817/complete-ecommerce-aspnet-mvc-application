@@ -13,7 +13,10 @@
                             <p class="card-text">
                                 <h5 class="card-title">
                                     @Model.Name
-                                <a class="text-white float-end" asp-action="Edit" asp-route-id="@Model.Id"><i class="bi bi-pencil-square"></i></a>
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                                    {
+                                        <a class="text-white float-end" asp-action="Edit" asp-route-id="@Model.Id"><i class="bi bi-pencil-square"></i></a>
+                                    }           
                                 </h5>
                             </p>
                         </div>
@@ -81,7 +84,7 @@
                                 </a>
                                 <a class="btn btn-success text-white @((DateTime.Now > Model.EndDate) ? "disabled" : "")"
                                    asp-controller="Orders"
-                               asp-action="AddItemToShoppingCart"
+                                   asp-action="AddItemToShoppingCart"
                                    asp-route-id="@Model.Id">
                                     <i class="bi bi-cart-plus"></i> Add to Cart (Price @Model.Price.ToString("c"))
                                 </a>

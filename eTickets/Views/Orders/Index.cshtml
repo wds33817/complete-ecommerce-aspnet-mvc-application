@@ -16,7 +16,7 @@
                     <th>Order ID</th>
                     <th>Items</th>
                     <th>Total</th>
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
                     {
                         <th>User</th>
                     }
@@ -49,12 +49,9 @@
                     <td class="align-middle">
                         @total.ToString("c")
                     </td>
-                    @{/*
-                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
                         {
                         <td class="align-middle"> @order.User.FullName </td>
-                            }
-                            */
                         }
                     </tr>
                 }

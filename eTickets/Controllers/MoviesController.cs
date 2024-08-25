@@ -18,6 +18,11 @@ namespace eTickets.Controllers
         public async Task<IActionResult> Index()
         {
             var allMovies = await _service.GetAllAsync(n => n.Cinema);
+            /*
+             *SELECT [m].[Id], [m].[CinemaId], [m].[Description], [m].[EndDate], [m].[ImageURL], [m].[MovieCategory], [m].[Name], [m].[Price], [m].[ProducerId], [m].[StartDate], [c].[Id], [c].[Description], [c].[Logo], [c].[Name]
+               FROM [Movies] AS [m]
+               INNER JOIN [Cinemas] AS [c] ON [m].[CinemaId] = [c].[Id]
+             */
             return View(allMovies);
         }
 
